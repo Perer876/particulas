@@ -22,34 +22,34 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def click_agregarFinal(self):
-        # Verifico que no haya espacios en blanco.
-        if self.ui.id_lineEdit.text() != '' and self.ui.velocidad_lineEdit.text() != '':
-            iD = int(self.ui.id_lineEdit.text())
+        iD = self.ui.id_lineEdit.text()
+        velocidad = self.ui.velocidad_lineEdit.text()
+        # Verificamos que las casillas libres no esten vacias y tambien que solo contengan números.
+        if (iD.isnumeric() and velocidad.isnumeric()):
             origenX = self.ui.origenX_spinBox.value()
             origenY = self.ui.origenY_spinBox.value()
             destinoX = self.ui.destinoX_spinBox.value()
             destinoY = self.ui.destinoY_spinBox.value()
-            velocidad = int(self.ui.velocidad_lineEdit.text())
             red = self.ui.red_spinBox.value()
             green = self.ui.green_spinBox.value()
             blue = self.ui.blue_spinBox.value()
             # Instanciamos una particula para solamente agregarla al final de la lista.
-            particula = Particula(iD, origenX, origenY, destinoX, destinoY, velocidad, red, green, blue)
+            particula = Particula(int(iD), origenX, origenY, destinoX, destinoY, int(velocidad), red, green, blue)
             self.__particulas.agregar_final(particula)
 
     @Slot()
     def click_agregarInicio(self):
-        # Verifico que no haya espacios en blanco.
-        if self.ui.id_lineEdit.text() != '' and self.ui.velocidad_lineEdit.text() != '':
-            iD = int(self.ui.id_lineEdit.text())
+        iD = self.ui.id_lineEdit.text()
+        velocidad = self.ui.velocidad_lineEdit.text()
+        # Verificamos que las casillas libres no esten vacias y tambien que solo contengan números.
+        if (iD.isnumeric() and velocidad.isnumeric()):
             origenX = self.ui.origenX_spinBox.value()
             origenY = self.ui.origenY_spinBox.value()
             destinoX = self.ui.destinoX_spinBox.value()
             destinoY = self.ui.destinoY_spinBox.value()
-            velocidad = int(self.ui.velocidad_lineEdit.text())
             red = self.ui.red_spinBox.value()
             green = self.ui.green_spinBox.value()
             blue = self.ui.blue_spinBox.value()
-            # Instanciamos una particula para solamente agregarla al inicio de la lista.
-            particula = Particula(iD, origenX, origenY, destinoX, destinoY, velocidad, red, green, blue)
+            # Instanciamos una particula para solamente agregarla al final de la lista.
+            particula = Particula(int(iD), origenX, origenY, destinoX, destinoY, int(velocidad), red, green, blue)
             self.__particulas.agregar_inicio(particula)
