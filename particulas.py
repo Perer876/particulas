@@ -20,6 +20,21 @@ class Particulas:
             str(particula) + '\n' for particula in self.__particulas
         )
 
+    def __len__(self):
+        return len(self.__particulas)
+
+    def __iter__(self):
+        self.count = 0
+        return self
+
+    def __next__(self):
+        if self.count < len(self.__particulas):
+            particula = self.__particulas[self.count]
+            self.count += 1
+            return particula
+        else:
+            raise StopIteration
+
     def guardar(self, ubicacion):
         try:
             with open(ubicacion, 'w') as archivo:
