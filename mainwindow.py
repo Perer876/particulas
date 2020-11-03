@@ -18,6 +18,8 @@ class MainWindow(QMainWindow):
        self.ui.mostrar_pushButton.clicked.connect(self.click_mostrar)
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
+       self.ui.buscar_pushButton.clicked.connect(self.click_buscar)
+       self.ui.mostrarTabla_pushButton.clicked.connect(self.click_mostrarTabla)
     
     @Slot()
     def action_abrir_archivo(self):
@@ -89,3 +91,11 @@ class MainWindow(QMainWindow):
             # Instanciamos una particula para solamente agregarla al final de la lista.
             particula = Particula(int(iD), origenX, origenY, destinoX, destinoY, int(velocidad), red, green, blue)
             self.__particulas.agregar_inicio(particula)
+
+    @Slot()
+    def click_buscar(self):
+        print("buscar")
+
+    @Slot()
+    def click_mostrarTabla(self):
+        print("mostrar tabla")
