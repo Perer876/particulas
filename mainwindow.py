@@ -1,9 +1,12 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
+from PySide2.QtGui import QPen, QColor, QTransform
 from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from particulas import Particulas
 from particula import Particula
 from algoritmos import distancia_euclidiana
+
+DIA_CIR = 5
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -23,6 +26,9 @@ class MainWindow(QMainWindow):
         
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
+
+       self.scene = QGraphicsScene()
+       self.ui.graphicsView.setScene(self.scene)
     
     # Inserta un objeto Particula en la fila indicada.
     def insertar_particula_en_tabla(self, particula:Particula, row:int):
@@ -46,7 +52,7 @@ class MainWindow(QMainWindow):
         self.ui.tabla.setItem(row, 7, green_widget)
         self.ui.tabla.setItem(row, 8, blue_widget)
         self.ui.tabla.setItem(row, 9, distancia_widget)
-
+        
     def sacar_particula(self):
         iD = self.ui.id_lineEdit.text()
         velocidad = self.ui.velocidad_lineEdit.text()
@@ -147,9 +153,23 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def dibujar(self):
-        print("Dibujar")
+        for particula in self.__particulas:
+            pen = QPen()
+            pen.setWidth(3)
+            
+            color = QColor(particula.red, particula.green, particula.blue)
+            pen.setColor(color)
+            self.scene.addEllipse(particula.origen_x - DIA_CIR/2, particula.origen_y - DIA_CIR/2,DIA_CIR,DIA_CIR, pen)
+            self.scene.addEllipse(particula.destino_x - DIA_CIR/2, particula.destino_y - DIA_CIR/2,DIA_CIR,DIA_CIR, pen)
+            self.scene.addLine(particula.origen_x,particula.origen_y, particula.destino_x, particula.destino_y, pen)
 
     @Slot()
     def limpiar(self):
-        print("Limpiar")
+        self.scene.clear()
+    
+    def wheelEvent(self, event):
+        if event.delta() > 0:
+            self.ui.graphicsView.scale(1.2, 1.2)
+        else:
+            self.ui.graphicsView.scale(0.8, 0.8)
     
