@@ -18,6 +18,8 @@ class MainWindow(QMainWindow):
        self.ui.mostrar_pushButton.clicked.connect(self.click_mostrar)
        self.ui.buscar_pushButton.clicked.connect(self.click_buscar)
        self.ui.mostrarTabla_pushButton.clicked.connect(self.click_mostrarTabla)
+       self.ui.dibujar_pushButton.clicked.connect(self.dibujar)
+       self.ui.limpiar_pushButton.clicked.connect(self.limpiar)
         
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
@@ -142,3 +144,12 @@ class MainWindow(QMainWindow):
                 "Error",
                 "No se pudo crear el archivo " + ubicacion
             )
+
+    @Slot()
+    def dibujar(self):
+        print("Dibujar")
+
+    @Slot()
+    def limpiar(self):
+        print("Limpiar")
+    
