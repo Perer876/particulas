@@ -265,7 +265,22 @@
     <addaction name="actionAbrir"/>
     <addaction name="actionGuardar"/>
    </widget>
+   <widget class="QMenu" name="menuOrdenar">
+    <property name="title">
+     <string>Editar</string>
+    </property>
+    <widget class="QMenu" name="menuOrdenar_particulas_por">
+     <property name="title">
+      <string>Ordenar particulas por</string>
+     </property>
+     <addaction name="action_OrderByIdAsc"/>
+     <addaction name="action_OrderByDistanciaDes"/>
+     <addaction name="action_OrderByVelocidadAsc"/>
+    </widget>
+    <addaction name="menuOrdenar_particulas_por"/>
+   </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuOrdenar"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbrir">
@@ -282,6 +297,31 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionPor_id">
+   <property name="text">
+    <string>Por id</string>
+   </property>
+  </action>
+  <action name="actionPor_distancia">
+   <property name="text">
+    <string>Por distancia</string>
+   </property>
+  </action>
+  <action name="action_OrderByIdAsc">
+   <property name="text">
+    <string>Id (ascendente)</string>
+   </property>
+  </action>
+  <action name="action_OrderByDistanciaDes">
+   <property name="text">
+    <string>Distancia (descendente)</string>
+   </property>
+  </action>
+  <action name="action_OrderByVelocidadAsc">
+   <property name="text">
+    <string>Velocidad (ascendente)</string>
    </property>
   </action>
  </widget>

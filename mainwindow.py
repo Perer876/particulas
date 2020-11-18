@@ -26,6 +26,9 @@ class MainWindow(QMainWindow):
         
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
+       self.ui.action_OrderByIdAsc.triggered.connect(self.action_ordenar_por_id_ascendente)
+       self.ui.action_OrderByDistanciaDes.triggered.connect(self.action_ordenar_por_distancia_descendente)
+       self.ui.action_OrderByVelocidadAsc.triggered.connect(self.action_ordenar_por_velocidad_ascendente)
 
        self.scene = QGraphicsScene()
        self.ui.graphicsView.setScene(self.scene)
@@ -150,6 +153,18 @@ class MainWindow(QMainWindow):
                 "Error",
                 "No se pudo crear el archivo " + ubicacion
             )
+
+    @Slot()
+    def action_ordenar_por_id_ascendente(self):
+        print("ordenar por id asc")
+
+    @Slot()
+    def action_ordenar_por_distancia_descendente(self):
+        print("ordenar por distancia des")
+
+    @Slot()
+    def action_ordenar_por_velocidad_ascendente(self):
+        print("ordenar por velocidad asc")
 
     @Slot()
     def dibujar(self):
