@@ -156,15 +156,15 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def action_ordenar_por_id_ascendente(self):
-        print("ordenar por id asc")
+        self.__particulas.ordenar_por_id_asc()
 
     @Slot()
     def action_ordenar_por_distancia_descendente(self):
-        print("ordenar por distancia des")
+        self.__particulas.ordenar_por_distancia_des()
 
     @Slot()
     def action_ordenar_por_velocidad_ascendente(self):
-        print("ordenar por velocidad asc")
+        self.__particulas.ordenar_por_velocidad_asc()
 
     @Slot()
     def dibujar(self):

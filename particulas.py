@@ -53,3 +53,24 @@ class Particulas:
             return 1
         except:
             return 0
+
+    def ordenar_por_id_asc(self):
+        self.__particulas.sort()
+
+    def ordenar_por_id_des(self):
+        self.__particulas.sort(reverse=True)
+
+    def ordenar_por_distancia_asc(self):
+        self.__particulas.sort(key=sort_by_distancia)
+
+    def ordenar_por_distancia_des(self):
+        self.__particulas.sort(key=sort_by_distancia, reverse=True)
+
+    def ordenar_por_velocidad_asc(self):
+        self.__particulas.sort(key=lambda particula: particula.velocidad)
+
+    def ordenar_por_velocidad_des(self):
+        self.__particulas.sort(key=lambda particula: particula.velocidad, reverse=True)
+
+def sort_by_distancia(particula:Particula):
+    return particula.distancia
