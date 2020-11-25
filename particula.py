@@ -35,10 +35,10 @@ class Particula:
             "origen_y": self.__origen_y,
             "destino_x": self.__destino_x,
             "destino_y": self.__destino_y,
-            "velocidad": self.__velocidad,
             "red": self.__red,
             "green": self.__green,
-            "blue": self.__blue
+            "blue": self.__blue,
+            "velocidad": self.__velocidad
         }
 
     @property
