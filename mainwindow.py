@@ -5,6 +5,7 @@ from ui_mainwindow import Ui_MainWindow
 from particulas import Particulas
 from particula import Particula
 from algoritmos import distancia_euclidiana
+from pprint import pformat
 
 DIA_CIR = 5
 
@@ -13,6 +14,7 @@ class MainWindow(QMainWindow):
        super(MainWindow, self).__init__()
 
        self.__particulas = Particulas()
+       self.__grafo = {}
        self.ui = Ui_MainWindow()
        self.ui.setupUi(self)
 
@@ -26,6 +28,7 @@ class MainWindow(QMainWindow):
         
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
+       self.ui.actionGrafo.triggered.connect(self.action_grafo)
        self.ui.action_OrderByIdAsc.triggered.connect(self.action_ordenar_por_id_ascendente)
        self.ui.action_OrderByDistanciaDes.triggered.connect(self.action_ordenar_por_distancia_descendente)
        self.ui.action_OrderByVelocidadAsc.triggered.connect(self.action_ordenar_por_velocidad_ascendente)
@@ -153,6 +156,29 @@ class MainWindow(QMainWindow):
                 "Error",
                 "No se pudo crear el archivo " + ubicacion
             )
+
+    @Slot()
+    def action_grafo(self):
+        self.__grafo.clear()
+
+        for particula in self.__particulas:
+            key = (particula.origen_x, particula.origen_y)
+            values = (particula.destino_x, particula.destino_y, int(particula.distancia))
+            if key in self.__grafo:
+                self.__grafo[key].append(values)
+            else:
+                self.__grafo[key] = [values]
+            key = (particula.destino_x, particula.destino_y)
+            values = (particula.origen_x, particula.origen_y, int(particula.distancia))
+            if key in self.__grafo:
+                self.__grafo[key].append(values)
+            else:
+                self.__grafo[key] = [values]
+        
+        str = pformat(self.__grafo, width=40, indent=1)
+        print(str)
+        self.ui.salida.clear()
+        self.ui.salida.insertPlainText(str)
 
     @Slot()
     def action_ordenar_por_id_ascendente(self):
