@@ -4,8 +4,8 @@ from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from particulas import Particulas
 from particula import Particula
-from algoritmos import distancia_euclidiana
 from pprint import pformat
+from algoritmos import distancia_euclidiana, busqueda_profundidad, busqueda_anchura
 
 DIA_CIR = 5
 
@@ -215,7 +215,26 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def action_recorrido_profundidad_amplitud(self):
-        print("RPA")
+        origen = (self.ui.origenX_spinBox.value(), self.ui.origenY_spinBox.value())
+        self.generar_grafo()
+        if origen in self.__grafo:
+            self.ui.salida.clear()
+            recorrido = busqueda_profundidad(self.__grafo, origen)
+            self.ui.salida.insertPlainText(" - Recorrido Profundidad -\n")
+            for vertice in recorrido:
+                self.ui.salida.insertPlainText(str(vertice) + '\n')
+
+            recorrido = busqueda_anchura(self.__grafo, origen)
+            self.ui.salida.insertPlainText("\n - Recorrido Anchura -\n")
+            for vertice in recorrido:
+                self.ui.salida.insertPlainText(str(vertice) + '\n')
+
+        else:
+            QMessageBox.critical(
+                self,
+                "Alerta",
+                "El vertice no existe"
+            )
 
     @Slot()
     def dibujar(self):
