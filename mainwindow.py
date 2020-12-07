@@ -29,9 +29,15 @@ class MainWindow(QMainWindow):
        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
        self.ui.actionGrafo.triggered.connect(self.action_grafo)
+
        self.ui.action_OrderByIdAsc.triggered.connect(self.action_ordenar_por_id_ascendente)
+       self.ui.action_OrderByIdDes.triggered.connect(self.action_ordenar_por_id_descendente)
+       self.ui.action_OrderByDistanciaAsc.triggered.connect(self.action_ordenar_por_distancia_ascendente)
        self.ui.action_OrderByDistanciaDes.triggered.connect(self.action_ordenar_por_distancia_descendente)
        self.ui.action_OrderByVelocidadAsc.triggered.connect(self.action_ordenar_por_velocidad_ascendente)
+       self.ui.action_OrderByVelocidadDes.triggered.connect(self.action_ordenar_por_velocidad_descendente)
+
+       self.ui.actionRecorrido_Profundidad_Amplitud.triggered.connect(self.action_recorrido_profundidad_amplitud)
 
        self.scene = QGraphicsScene()
        self.ui.graphicsView.setScene(self.scene)
@@ -184,6 +190,13 @@ class MainWindow(QMainWindow):
     def action_ordenar_por_id_ascendente(self):
         self.__particulas.ordenar_por_id_asc()
 
+    def action_ordenar_por_id_descendente(self):
+        self.__particulas.ordenar_por_id_des()    
+
+    @Slot()
+    def action_ordenar_por_distancia_ascendente(self):
+        self.__particulas.ordenar_por_distancia_asc()
+
     @Slot()
     def action_ordenar_por_distancia_descendente(self):
         self.__particulas.ordenar_por_distancia_des()
@@ -191,6 +204,14 @@ class MainWindow(QMainWindow):
     @Slot()
     def action_ordenar_por_velocidad_ascendente(self):
         self.__particulas.ordenar_por_velocidad_asc()
+
+    @Slot()
+    def action_ordenar_por_velocidad_descendente(self):
+        self.__particulas.ordenar_por_velocidad_des()
+
+    @Slot()
+    def action_recorrido_profundidad_amplitud(self):
+        print("RPA")
 
     @Slot()
     def dibujar(self):
