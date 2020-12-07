@@ -83,6 +83,28 @@ class MainWindow(QMainWindow):
         else:
             return None
 
+    def generar_grafo(self):
+        self.__grafo.clear()
+        for particula in self.__particulas:
+            key = (particula.origen_x, particula.origen_y)
+            values = (particula.destino_x, particula.destino_y, int(particula.distancia))
+            if key in self.__grafo:
+                self.__grafo[key].append(values)
+            else:
+                self.__grafo[key] = [values]
+            key = (particula.destino_x, particula.destino_y)
+            values = (particula.origen_x, particula.origen_y, int(particula.distancia))
+            if key in self.__grafo:
+                self.__grafo[key].append(values)
+            else:
+                self.__grafo[key] = [values]
+
+    def imprimir_grafo(self):
+        str = pformat(self.__grafo, width=40, indent=1)
+        print(str)
+        self.ui.salida.clear()
+        self.ui.salida.insertPlainText(str)
+
     @Slot()
     def click_mostrar(self):
         self.ui.salida.clear()
@@ -165,26 +187,8 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def action_grafo(self):
-        self.__grafo.clear()
-
-        for particula in self.__particulas:
-            key = (particula.origen_x, particula.origen_y)
-            values = (particula.destino_x, particula.destino_y, int(particula.distancia))
-            if key in self.__grafo:
-                self.__grafo[key].append(values)
-            else:
-                self.__grafo[key] = [values]
-            key = (particula.destino_x, particula.destino_y)
-            values = (particula.origen_x, particula.origen_y, int(particula.distancia))
-            if key in self.__grafo:
-                self.__grafo[key].append(values)
-            else:
-                self.__grafo[key] = [values]
-        
-        str = pformat(self.__grafo, width=40, indent=1)
-        print(str)
-        self.ui.salida.clear()
-        self.ui.salida.insertPlainText(str)
+        self.generar_grafo()
+        self.imprimir_grafo();
 
     @Slot()
     def action_ordenar_por_id_ascendente(self):
