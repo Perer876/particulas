@@ -274,8 +274,13 @@
       <string>Ordenar particulas por</string>
      </property>
      <addaction name="action_OrderByIdAsc"/>
+     <addaction name="action_OrderByIdDes"/>
+     <addaction name="separator"/>
+     <addaction name="action_OrderByDistanciaAsc"/>
      <addaction name="action_OrderByDistanciaDes"/>
+     <addaction name="separator"/>
      <addaction name="action_OrderByVelocidadAsc"/>
+     <addaction name="action_OrderByVelocidadDes"/>
     </widget>
     <addaction name="menuOrdenar_particulas_por"/>
    </widget>
@@ -285,9 +290,16 @@
     </property>
     <addaction name="actionGrafo"/>
    </widget>
+   <widget class="QMenu" name="menuAlgoritmos">
+    <property name="title">
+     <string>Algoritmos</string>
+    </property>
+    <addaction name="actionRecorrido_Profundidad_Amplitud"/>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuVer"/>
    <addaction name="menuOrdenar"/>
+   <addaction name="menuAlgoritmos"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionAbrir">
@@ -337,6 +349,26 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+G</string>
+   </property>
+  </action>
+  <action name="action_OrderByIdDes">
+   <property name="text">
+    <string>Id (descendente)</string>
+   </property>
+  </action>
+  <action name="action_OrderByDistanciaAsc">
+   <property name="text">
+    <string>Distancia (ascendente)</string>
+   </property>
+  </action>
+  <action name="actionRecorrido_Profundidad_Amplitud">
+   <property name="text">
+    <string>Recorrido Profundidad | Amplitud</string>
+   </property>
+  </action>
+  <action name="action_OrderByVelocidadDes">
+   <property name="text">
+    <string>Velocidad (descendente)</string>
    </property>
   </action>
  </widget>
