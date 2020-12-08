@@ -66,10 +66,10 @@ class MainWindow(QMainWindow):
         self.ui.tabla.setItem(row, 9, distancia_widget)
         
     def sacar_particula(self):
-        iD = self.ui.id_lineEdit.text()
         velocidad = self.ui.velocidad_lineEdit.text()
         # Verificamos que las casillas libres no esten vacias y tambien que solo contengan números.
-        if (iD.isnumeric() and velocidad.isnumeric()):
+        if velocidad.isnumeric():
+            iD = self.ui.id_lineEdit.text()
             origenX = self.ui.origenX_spinBox.value()
             origenY = self.ui.origenY_spinBox.value()
             destinoX = self.ui.destinoX_spinBox.value()
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
             green = self.ui.green_spinBox.value()
             blue = self.ui.blue_spinBox.value()
             # Instanciamos una particula para solamente agregarla al final de la lista.
-            particula = Particula(int(iD), origenX, origenY, destinoX, destinoY, int(velocidad), red, green, blue)
+            particula = Particula(iD, origenX, origenY, destinoX, destinoY, int(velocidad), red, green, blue)
             return particula
         else:
             return None
@@ -125,22 +125,19 @@ class MainWindow(QMainWindow):
     @Slot()
     def click_buscar(self):
         id_particula = self.ui.buscar_lineEdit.text()
-        if(id_particula.isnumeric()):
-            id_particula = int(id_particula)
-            encontrado = False
-            for particula in self.__particulas:
-                if(particula.id == id_particula):
-                    self.ui.tabla.clear()
-                    self.ui.tabla.setRowCount(1)
-                    self.insertar_particula_en_tabla(particula, 0)
-                    encontrado = True
-                    return
-            if not encontrado:
-                QMessageBox.warning(
-                    self,
-                    "Atención",
-                    f"La partiula con el id {id_particula} no fue encontrado"
-                )
+        encontrado = False
+        for particula in self.__particulas:
+            if(particula.id == id_particula):
+                self.ui.tabla.clear()
+                self.ui.tabla.setRowCount(1)
+                self.insertar_particula_en_tabla(particula, 0)
+                encontrado = True
+        if not encontrado:
+            QMessageBox.warning(
+            self,
+            "Atención",
+            f"La partiula con el id {id_particula} no fue encontrado"
+            )
 
     @Slot()
     def click_mostrarTabla(self):
